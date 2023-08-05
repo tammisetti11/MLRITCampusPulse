@@ -15,10 +15,12 @@ connectDB();
 const app = express();
 
 // CORS configuration
-const corsOptions = {
-    origin: "http://localhost:5173", // your frontend origin
-    credentials: true,
-};
+
+app.use(cors({
+  origin: 'https://mlritcampuspulse-frontend1.onrender.com',
+  credentials: true
+}));
+
 app.use(cors(corsOptions));
 
 // Middleware to parse JSON

@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: axios.get("https://campuspulse-api.onrender.com/api/events")
+  baseURL: import.meta.env.VITE_API_URL,
+  withCredentials: true, // if you're using cookies/auth
 });
 
 // Automatically attach JWT to requests
