@@ -97,6 +97,17 @@ OTP: 123456
 
 ---
 
+## Snippets
+![Alt Text](https://res.cloudinary.com/dbjaogapk/image/upload/v1753241921/Screenshot_2025-07-18_at_3.03.27_PM_diaumh.png)
+![Alt Text](https://res.cloudinary.com/dbjaogapk/image/upload/v1753241920/Screenshot_2025-07-20_at_15.47.21_l0fomx.png)
+![Alt Text](https://res.cloudinary.com/dbjaogapk/image/upload/v1753241919/Screenshot_2025-07-20_at_15.49.50_eu7xex.png)
+![Alt Text](https://res.cloudinary.com/dbjaogapk/image/upload/v1753241918/Screenshot_2025-07-20_at_15.50.10_orbas4.png)
+![Alt Text](https://res.cloudinary.com/dbjaogapk/image/upload/v1753241916/Screenshot_2025-07-20_at_15.48.02_jisnw1.png)
+![Alt Text](https://res.cloudinary.com/dbjaogapk/image/upload/v1753241917/Screenshot_2025-07-20_at_15.48.43_pxmzov.png)
+![Alt Text](https://res.cloudinary.com/dbjaogapk/image/upload/v1753241916/Screenshot_2025-07-20_at_15.49.33_g2orcc.png)
+
+---
+
 ## 🙋‍♂️ Contributors
 
 - **Naveen Tammisetti**
