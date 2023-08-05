@@ -98,9 +98,34 @@ export default function EventDetails() {
         return new Date(dateString).toLocaleDateString(undefined, options);
     };
 
-    const handleAddToCalendar = () => {
-        alert("Add to calendar functionality would go here!");
+    const getGoogleCalendarLink = (event) => {
+        console.log("startDate:", event.startDate, "endDate:", event.endDate);
+        const formatDate = (date) => {
+            const d = new Date(date);
+            if (isNaN(d)) return ""; // Prevent invalid date error
+            return d.toISOString().replace(/-|:|\.\d\d\d/g, "");
+        };
+
+        const start = formatDate(event.startDate);
+        const end = formatDate(event.endDate);
+
+        if (!start || !end) {
+            console.warn("Invalid start or end date for event:", event);
+            return "#"; // fallback or skip rendering
+        }
+
+        const details = {
+            text: event.title || "Event",
+            dates: `${start}/${end}`,
+            details: event.description || "",
+            location: event.location || "",
+        };
+
+        const params = new URLSearchParams(details);
+        return `https://calendar.google.com/calendar/render?action=TEMPLATE&${params.toString()}`;
     };
+
+
 
     // Corrected Google Maps link
     if (loading) {
@@ -220,13 +245,21 @@ export default function EventDetails() {
                             {/* Add to Calendar Icon */}
                             <Button
                                 variant="light"
-                                className="rounded-pill px-2 py-1 d-flex align-items-center justify-content-center shadow-sm"
-                                onClick={handleAddToCalendar}
+                                className="rounded-pill px-3 py-2 d-flex align-items-center gap-2 shadow-sm"
+                                onClick={() => window.open(getGoogleCalendarLink(event), "_blank")}
                                 title="Add to Calendar"
-                                style={{ backgroundColor: "#E8F0FE", border: "none" }}
+                                style={{
+                                    backgroundColor: "#E8F0FE",
+                                    border: "none",
+                                    fontWeight: 500,
+                                    color: "#1a73e8"
+                                }}
                             >
-                                <i className="bi bi-calendar-plus fs-5 text-primary"></i>
+                                <i className="bi bi-calendar-plus fs-5"></i>
+                                <span style={{ fontSize: "0.95rem" }}>Add to Calendar</span>
                             </Button>
+
+
                         </div>
 
                     </div>
@@ -272,7 +305,7 @@ export default function EventDetails() {
                                     <p className="mb-1 fw-semibold text-uppercase text-muted small">Organizer</p> {/* Added small */}
                                     <p className="mb-0 text-dark fw-semibold small">{event.organizer || "TBA"}</p> {/* Added small */}
                                 </div>
-                               
+
 
                                 {/* Price */}
                                 <div className="col-md-6 mt-3 pt-md-2">
