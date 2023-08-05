@@ -33,4 +33,8 @@ app.use('/api/tickets', ticketRoutes); // ✅ Register the ticket routes correct
 
 // Start the server
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
