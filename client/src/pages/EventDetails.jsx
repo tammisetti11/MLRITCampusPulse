@@ -249,29 +249,13 @@ export default function EventDetails() {
                         <h3 className="text-uppercase fw-bold mb-3 text-center text-md-start text-dark fs-4">About This Event</h3> {/* Reduced mb-4 to mb-3, added fs-4 */}
 
                         <p className="text-secondary mb-3 pb-1" style={{ fontSize: "0.95rem" }}>{event.description}</p> {/* Reduced lead to no lead, added specific font-size, reduced mb-4 to mb-3, pb-2 to pb-1 */}
-
-                        {/* If you add curator/funding data to your 'event' object in the backend,
-                            you can uncomment and populate this section.
-                            For now, it's removed as per your request not to add new data.
-                        */}
-                        {/* Example if 'event' had these properties:
-                        {((event.studentCurators) || (event.facultyCurators) || (event.guestCurator) || (event.fundingInfo)) && (
-                            <div className="bg-light p-3 rounded-3 mb-4">
-                                {event.studentCurators && <p className="mb-1 small"><strong className="text-dark">STUDENT CURATORS</strong> | <span className="text-secondary">{event.studentCurators}</span></p>}
-                                {event.facultyCurators && <p className="mb-1 small"><strong className="text-dark">FACULTY CURATORS</strong> | <span className="text-secondary">{event.facultyCurators}</span></p>}
-                                {event.guestCurator && <p className="mb-1 small"><strong className="text-dark">GUEST CURATOR</strong> | <span className="text-secondary">{event.guestCurator}</span></p>}
-                                {event.fundingInfo && <p className="mb-0 text-secondary tiny-text">{event.fundingInfo}</p>}
-                            </div>
-                        )}
-                        */}
-
                         {/* START: Your provided "Event Details" section with enhanced styling */}
                         <h4 className="text-uppercase fw-bold mt-4 mb-3 border-top pt-3 text-dark fs-5">Event Details</h4> {/* Reduced mt-5 to mt-4, mb-4 to mb-3, pt-4 to pt-3, added fs-5 */}
                         <div className="p-4 bg-white rounded-3 shadow-sm border"> {/* Kept p-4 as it gives a good internal padding, you can reduce to p-3 if needed */}
                             <div className="row g-3"> {/* Reduced g-4 to g-3 */}
                                 {/* Event Type */}
                                 <div className="col-md-6">
-                                    <p className="mb-1 fw-semibold text-uppercase text-muted small">Event Type</p> {/* Added small */}
+                                    <p className="mb-1 fw-semibold text-uppercase text-muted small">Event Category</p> {/* Added small */}
                                     <div className="d-flex flex-wrap gap-2">
                                         {event.category ? (
                                             <span className="badge rounded-pill px-2 py-1 fw-normal" style={{ backgroundColor: "#FF6B00", color: "#fff", fontSize: "0.75rem" }}> {/* Reduced px-3 py-2, font-size */}
@@ -283,39 +267,12 @@ export default function EventDetails() {
                                     </div>
                                 </div>
 
-                                {/* Audience */}
-                                <div className="col-md-6">
-                                    <p className="mb-1 fw-semibold text-uppercase text-muted small">Audience</p> {/* Added small */}
-                                    <div className="d-flex flex-wrap gap-2">
-                                        {event.audience && event.audience.length > 0 ? (
-                                            event.audience.map((aud, idx) => (
-                                                <span key={idx} className="badge rounded-pill px-2 py-1 fw-normal" style={{ backgroundColor: "#FF6B00", color: "#fff", fontSize: "0.75rem" }}> {/* Reduced px-3 py-2, font-size */}
-                                                    {aud.toUpperCase()}
-                                                </span>
-                                            ))
-                                        ) : (
-                                            <span className="text-muted small">All</span>
-                                        )}
-                                    </div>
-                                </div>
-
-                                {/* Website */}
-                                <div className="col-md-6 mt-3 pt-md-2">
-                                    <p className="mb-1 fw-semibold text-uppercase text-muted small">Website</p> {/* Added small */}
-                                    {event.externalLink || event.website ? (
-                                        <a href={event.externalLink || event.website} target="_blank" rel="noopener noreferrer" className="text-decoration-none fw-semibold small" style={{ color: "#FF6B00" }}> {/* Added small */}
-                                            {event.externalLink || event.website}
-                                        </a>
-                                    ) : (
-                                        <span className="text-muted small">N/A</span>
-                                    )}
-                                </div>
-
                                 {/* Organizer (Department in screenshot, but you prefer Organizer) */}
                                 <div className="col-md-6 mt-3 pt-md-2">
                                     <p className="mb-1 fw-semibold text-uppercase text-muted small">Organizer</p> {/* Added small */}
                                     <p className="mb-0 text-dark fw-semibold small">{event.organizer || "TBA"}</p> {/* Added small */}
                                 </div>
+                               
 
                                 {/* Price */}
                                 <div className="col-md-6 mt-3 pt-md-2">

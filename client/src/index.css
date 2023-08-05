@@ -83,3 +83,86 @@
   padding: 0.4rem 0.8rem;
   border-radius: 999px;
 }
+
+.icon-link {
+  color: #222831; /* default text color */
+  transition: color 0.2s ease-in-out;
+}
+
+.icon-link:hover {
+  color: #FF6B00 !important; /* your brand color */
+}
+
+.event-card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.event-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 576px) {
+  .hero-carousel-wrapper {
+    height: 340px !important;
+  }
+  .hero-carousel-wrapper .carousel-caption h2 {
+    font-size: 1.6rem !important;
+  }
+  .hero-carousel-wrapper .carousel-caption {
+    max-width: 90% !important;
+    bottom: 1.4rem !important;
+  }
+}
+
+.hero-carousel-wrapper .carousel-indicators [data-bs-target] {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.hero-carousel-wrapper .carousel-control-prev-icon,
+.hero-carousel-wrapper .carousel-control-next-icon {
+  filter: drop-shadow(0 0 4px rgba(0,0,0,0.6));
+}
+
+.quick-tab-wrapper {
+  font-size: 0.95rem;
+  font-weight: 500;
+  scrollbar-width: none;
+}
+
+.quick-tab-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-tab {
+  padding-bottom: 0.5rem;
+  color: #555;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.filter-tab:hover {
+  color: #000;
+  border-bottom: 2px solid #ccc;
+}
+
+.filter-tab.active {
+  color: #FF6B00;
+  font-weight: 600;
+  border-bottom: 2px solid #FF6B00;
+}
+
+.eventbrite-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.eventbrite-card .event-card-icons {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.eventbrite-card:hover .event-card-icons {
+  opacity: 1;
+}

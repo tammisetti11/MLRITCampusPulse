@@ -47,9 +47,31 @@ export default function Header() {
                 <div className="d-flex align-items-center ms-auto">
                     {user?.role === "admin" && (
                         <Link to="/admin/create-event" className="btn btn-sm my-custom-button me-2 d-flex align-items-center gap-1">
-                            <i class="bi bi-plus-lg"></i> Create
+                            <i className="bi bi-plus-lg"></i> Create
                         </Link>
                     )}
+                    {/* Likes */}
+                    <Link
+                        to="/interested"
+                        className="icon-link d-flex flex-column align-items-center mx-3 text-decoration-none"
+                        style={{ fontSize: "0.75rem" }}
+                    >
+                        <FavoriteBorderOutlinedIcon fontSize="small" />
+                        <span style={{ marginTop: "1px" }}>Likes</span>
+                    </Link>
+
+                    {/* My Tickets */}
+                    <Link
+                        to="/my-tickets"
+                        className="icon-link d-flex flex-column align-items-center mx-3 text-decoration-none"
+                        style={{ fontSize: "0.75rem" }}
+                    >
+                        <ConfirmationNumberOutlinedIcon fontSize="small" />
+                        <span style={{ marginTop: "1px" }}>Tickets</span>
+                    </Link>
+
+
+
                     {/* Account with Dropdown */}
                     <div className="dropdown">
                         <button

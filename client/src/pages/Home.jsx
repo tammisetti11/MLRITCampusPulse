@@ -1,31 +1,31 @@
 // client/src/pages/Home.jsx
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import HeroCarousel from "../components/HeroCarousel";
 import EventCard from "../components/EventCard";
 import api from "../api/axios";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../index.css";
 import Footer from "../components/Footer";
+import UserContext from "../context/UserContext";
 
 export default function Home() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("upcoming");
   const [search, setSearch] = useState("");
+  const { user } = useContext(UserContext);
   const [filters, setFilters] = useState({
     price: "All",
     category: "all",
     organizer: "all",
   });
-
+  const [quickFilter, setQuickFilter] = useState("All");
   const [error, setError] = useState(null);
 
-  // Get all unique categories and organizers
   const categories = ["All Event Types", ...new Set(events.map(e => e.category))];
   const organizers = ["All Organisers", ...new Set(events.map(e => e.organizer))];
 
-  // Fetch events by tab
   useEffect(() => {
     setLoading(true);
     setError(null);
@@ -38,10 +38,8 @@ export default function Home() {
       .finally(() => setLoading(false));
   }, [activeTab]);
 
-  // Filter & Search
-  let filteredEvents = events;
+  let filteredEvents = [...events];
 
-  // Search
   if (search.trim() !== "") {
     const q = search.toLowerCase();
     filteredEvents = filteredEvents.filter(e =>
@@ -51,24 +49,48 @@ export default function Home() {
     );
   }
 
-  // Price filter
+  // Quick filter logic
+  filteredEvents = filteredEvents.filter(event => {
+    const now = new Date();
+    const start = new Date(event.startDate);
+    const diffDays = Math.ceil((start - now) / (1000 * 60 * 60 * 24));
+
+    switch (quickFilter) {
+      case "Today":
+        return start.toDateString() === now.toDateString();
+      case "This Week":
+        return diffDays >= 0 && diffDays <= 7;
+      case "Free":
+        return event.price === 0;
+      case "Online":
+        return event.isOnline === true;
+      case "Fun":
+        return event.category?.toLowerCase() === "fun";
+      case "Academic":
+        return event.category?.toLowerCase() === "academic";
+      case "Sports":
+        return event.category?.toLowerCase() === "sports";
+      case "Dance & Music":
+        return ["dance", "music"].includes(event.category?.toLowerCase());
+      default:
+        return true;
+    }
+  });
+
   if (filters.price === "free") {
     filteredEvents = filteredEvents.filter(e => e.price === 0);
   } else if (filters.price === "paid") {
     filteredEvents = filteredEvents.filter(e => e.price > 0);
   }
 
-  // Category filter
   if (filters.category !== "all") {
     filteredEvents = filteredEvents.filter(e => e.category === filters.category);
   }
 
-  // Organizer filter
   if (filters.organizer !== "all") {
     filteredEvents = filteredEvents.filter(e => e.organizer === filters.organizer);
   }
 
-  // Sort by date ascending
   filteredEvents.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
 
   return (
@@ -77,18 +99,24 @@ export default function Home() {
       <br />
 
       <div className="container my-10">
-        {/* Header */}
-        <div className="d-flex justify-content-between align-items-center mb-3">
+        <div className="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-3">
           <h2 className="mb-0">Events</h2>
-          <div className="d-flex align-items-center gap-3">
-            {/* Search */}
+
+          <div className="flex-grow-1" style={{ maxWidth: "400px" }}>
             <div
               className="input-group border rounded-pill overflow-hidden"
-              style={{ maxWidth: "600px", background: "#f9f9f9" }}
+              style={{
+                background: "#f9f9f9",
+                height: "36px", // Increased height
+              }}
             >
               <span
                 className="input-group-text border-0"
-                style={{ background: "#f9f9f9", color: "#FF6B00" }}
+                style={{
+                  background: "#f9f9f9",
+                  color: "#FF6B00",
+                  fontSize: "1.2rem",
+                }}
               >
                 <i className="bi bi-search"></i>
               </span>
@@ -98,38 +126,53 @@ export default function Home() {
                 placeholder="Search events..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                style={{ background: "#f9f9f9" }}
+                style={{
+                  background: "#f9f9f9",
+                  fontSize: "1rem",
+                }}
               />
             </div>
-
-            {/* Filter */}
-            <button
-              className="btn p-0"
-              data-bs-toggle="offcanvas"
-              data-bs-target="#filterCanvas"
-              aria-label="Filter events"
-              style={{ color: "#FF6B00" }}
-            >
-              <i className="bi bi-funnel-fill fs-4"></i>
-            </button>
           </div>
         </div>
 
-        {/* Tabs */}
-        <div className="event-tabs mb-4">
+
+        {/* Quick Filters */}
+        <div className="d-flex overflow-auto gap-4 mb-3 pb-3 border-bottom align-items-center quick-tab-wrapper">
+          {/* Filter Tabs */}
+          {[
+            "All", "Today", "This Week", "Free", "Online",
+            "Fun", "Academic", "Sports", "Dance & Music"
+          ].map((label) => (
+            <div
+              key={label}
+              className={`filter-tab ${quickFilter === label ? "active" : ""}`}
+              style={{ cursor: "pointer" }}
+              onClick={() => setQuickFilter(label)}
+            >
+              {label}
+            </div>
+          ))}
+
+          {/* More Filters Button */}
           <button
-            className={activeTab === "upcoming" ? "active" : ""}
-            onClick={() => setActiveTab("upcoming")}
+            className="btn btn-outline-dark d-flex align-items-center gap-2 py-1 px-3"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#filterCanvas"
+            aria-label="Open filter sidebar"
+            style={{
+              whiteSpace: "nowrap",
+              borderRadius: "20px",
+              fontSize: "0.9rem",
+              fontWeight: 500
+            }}
           >
-            Upcoming
-          </button>
-          <button
-            className={activeTab === "ongoing" ? "active" : ""}
-            onClick={() => setActiveTab("ongoing")}
-          >
-            Ongoing
+            <i className="bi bi-funnel-fill" style={{ color: "#FF6B00" }}></i>
+            More Filters
           </button>
         </div>
+
+
+
 
         {/* Grid */}
         {loading ? (
@@ -142,7 +185,11 @@ export default function Home() {
           <div className="row g-4">
             {filteredEvents.map((ev) => (
               <div key={ev._id} className="col-6 col-md-4 col-lg-3">
-                <EventCard event={ev} />
+                <EventCard
+                  event={ev}
+                  small={true}
+                  defaultInterested={user?.interestedEvents?.includes(ev._id)}
+                />
               </div>
             ))}
           </div>
@@ -167,7 +214,7 @@ export default function Home() {
         </div>
         <div className="offcanvas-body">
           <h6 className="mb-2 fw-bold">Price</h6>
-          {["All","Free", "Paid"].map((p) => (
+          {["All", "Free", "Paid"].map((p) => (
             <div className="form-check mb-2" key={p}>
               <input
                 className="form-check-input"
