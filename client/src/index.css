@@ -1,0 +1,85 @@
+:root {
+  --brand-color: #e67e22; /* your accent orange */
+}
+:root {
+  --cp-accent: #FF6B00;
+  --cp-accent-light: #FFF3E8;
+  --cp-bg: #f9f9f9;
+  --cp-text: #333;
+}
+
+.list-group-item.active {
+  background-color: var(--cp-accent) !important;
+  border-color: var(--cp-accent) !important;
+  color: #fff !important;
+}
+.list-group-item {
+  transition: background 0.2s, color 0.2s;
+}
+.list-group-item:hover {
+  background: var(--cp-accent-light);
+  cursor: pointer;
+}
+
+
+.event-tabs {
+  display: inline-flex;
+  border-bottom: 2px solid #ddd;
+}
+
+.event-tabs button {
+  background: none;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #555;
+  cursor: pointer;
+}
+
+.event-tabs button:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.event-tabs button.active {
+  color: var(--brand-color);
+  border-bottom: 3px solid var(--brand-color);
+}
+
+.btn-outline-secondary {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-outline-secondary i {
+  font-size: 1.25rem;
+}
+
+.navbar-brand span:hover {
+  filter: brightness(1.1);
+  transform: scale(1.02);
+  transition: all 0.2s ease;
+}
+
+.my-custom-button {
+  background-color: #FF6B00;
+  border-color: #FF6B00;
+  color: white; /* Text color */
+}
+.my-custom-button:hover {
+  background-color: #FF6B00; /* Slightly darker purple on hover */
+  border-color: black;
+}
+
+
+.badge-campuspulse {
+  background-color: #FF6B00;
+  color: #fff;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+}
