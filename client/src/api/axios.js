@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:4000/api",
+  baseURL: axios.get("https://campuspulse-api.onrender.com/api/events")
 });
 
 // Automatically attach JWT to requests
