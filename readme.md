@@ -105,7 +105,6 @@ OTP: 123456
 ![Alt Text](https://res.cloudinary.com/dbjaogapk/image/upload/v1753241916/Screenshot_2025-07-20_at_15.48.02_jisnw1.png)
 ![Alt Text](https://res.cloudinary.com/dbjaogapk/image/upload/v1753241917/Screenshot_2025-07-20_at_15.48.43_pxmzov.png)
 ![Alt Text](https://res.cloudinary.com/dbjaogapk/image/upload/v1753241916/Screenshot_2025-07-20_at_15.49.33_g2orcc.png)
-
 ---
 
 ## 🙋‍♂️ Contributors
